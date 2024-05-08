@@ -13,8 +13,11 @@ export default {
                 default:
                 return `https://flagcdn.com/48x36/${languageCode}.png`;
             }
-        }
-
+        },
+        setVoteRate() {
+            console.log(Math.floor(this.cardObjTv.vote_average));
+            return Math.floor(this.cardObjTv.vote_average / 2);
+        },
     }
 }
 </script>
@@ -22,12 +25,12 @@ export default {
 <template>
     <div>
         <div class="card-body">
+            <img :src="`https://image.tmdb.org/t/p/w342${cardObjTv.poster_path}`" alt="poster">
             <h3 class="card-title">{{cardObjTv.name}}</h3>
             <p class="card-text">{{cardObjTv.original_name}}</p>
             <p class="card-text">
-            <img :src="getFlagUrl(cardObjTv.original_language)" alt="flag-country">
-</p>
-
+                <img :src="getFlagUrl(cardObjTv.original_language)" alt="flag-country">
+            </p>
             <p class="card-text">{{cardObjTv.vote_average}}</p>
         </div>
     </div>
