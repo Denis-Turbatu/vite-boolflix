@@ -8,11 +8,8 @@ export default {
     },
     methods: {
         emitSaveQuery() {
-            console.log(this.query);
             store.searchQuery = this.query;
-            console.log(this.query);
             this.$emit('filter', this.query);
-            console.log(this.query);
         }
     },
 }

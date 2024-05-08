@@ -1,7 +1,7 @@
 <script>
 export default {
     props: {
-        cardObj: Object,
+        cardObjMov: Object,
     },
     methods: {
         getFlagUrl(languageCode) {
@@ -22,13 +22,13 @@ export default {
 <template>
     <div>
         <div class="card-body">
-            <h3 class="card-title">{{cardObj.title}}</h3>
-            <p class="card-text">{{cardObj.original_title}}</p>
+            <h3 class="card-title">{{cardObjMov.title}}</h3>
+            <p class="card-text">{{cardObjMov.original_title}}</p>
             <p class="card-text">
-            <img :src="getFlagUrl(cardObj.original_language)" alt="Bandiera">
+            <img :src="getFlagUrl(cardObjMov.original_language)" alt="flag-country">
 </p>
 
-            <p class="card-text">{{cardObj.vote_average}}</p>
+            <p class="card-text">{{cardObjMov.vote_average}}</p>
         </div>
     </div>
 </template>

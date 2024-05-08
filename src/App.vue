@@ -13,16 +13,27 @@ export default {
     data() {
         return {
             store,
-            cardArray: [],
+            cardArrayMovie: [],
+            cardArrayTv: [],
         }
     },
     methods: {
-        getAPI() {
+        getMovieAPI() {
             axios.get("https://api.themoviedb.org/3/search/movie", {params: {api_key: this.store.apiKey, query: this.store.searchQuery}}).then((resp) => {
-                this.cardArray = resp.data.results;
-                console.log(this.cardArray);
+                this.cardArrayMovie = resp.data.results;
+                console.log(this.cardArrayMovie);
             })
-        }
+        },
+        getTvSeriesAPI() {
+            axios.get("https://api.themoviedb.org/3/search/tv", {params: {api_key: this.store.apiKey, query: this.store.searchQuery}}).then((resp) => {
+                this.cardArrayTv = resp.data.results;
+                console.log(this.cardArrayTv);
+            })
+        },
+        getAPI(){
+            this.getMovieAPI();
+            this.getTvSeriesAPI();
+        },
     },
 }
 </script>
@@ -30,7 +41,7 @@ export default {
 <template>
     <div>
         <AppHeader @filter="getAPI"/>
-        <AppMain :cardArray="cardArray"/>
+        <AppMain :cardArrayMovie="cardArrayMovie" :cardArrayTv="cardArrayTv"/>
     </div>
 </template>
 
