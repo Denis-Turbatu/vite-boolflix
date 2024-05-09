@@ -1,8 +1,14 @@
 <script>
+
 export default {
     props: {
         card: Object,
         card: Object,
+    },
+    data() {
+        return {
+            curRating: Math.floor(this.card.vote_average / 2),
+        }
     },
     methods: {
         getFlagUrl(languageCode) {
@@ -16,10 +22,6 @@ export default {
                 default:
                 return `https://flagcdn.com/36x27/${languageCode}.png`;
             }
-        },
-        setVoteRate() {
-            console.log(Math.floor(this.card.vote_average));
-            return Math.floor(this.card.vote_average / 2);
         },
     }
 }
@@ -38,7 +40,10 @@ export default {
             <p class="card-text">
                 <img :src="getFlagUrl(card.original_language)" alt="flag-country">
             </p>
-            <p class="card-text">{{setVoteRate()}}</p>
+            <div class="star-rating">
+                    <i v-for="i in curRating" :key="i" class="fa-solid fa-star"></i>
+                    <i v-for="i in (5 - curRating)" :key="i" class="fa-regular fa-star"></i>
+            </div>
         </div>
     </div>
 </template>
