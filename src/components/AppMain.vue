@@ -1,11 +1,10 @@
 <script>
-import AppCardMovie from './AppCardMovie.vue';
-import AppCardTv from './AppCardTv.vue';
+import AppCard from './AppCard.vue';
+
 
 export default {
     components:{
-        AppCardMovie,
-        AppCardTv,
+        AppCard,
     },
     props: {
         cardArrayMovie: Array,
@@ -21,14 +20,11 @@ export default {
         <div class="row d-flex flex-wrap">
             <h2 class="text-white bg-primary">Film</h2>
             <div class="col-3" v-for="card in cardArrayMovie" :key="card">
-                <AppCardMovie :cardObjMov="card"/>
+                <AppCard :card="card"/>
             </div>
-        </div>
-        <!-- Serie TV -->
-        <div class="row d-flex flex-wrap">
-            <h2 class="text-white bg-danger">Serie TV</h2>
+            <h2 class="text-white bg-danger">Tv Series</h2>
             <div class="col-3" v-for="card in cardArrayTv" :key="card">
-                <AppCardTv :cardObjTv="card"/>
+                <AppCard :card="card"/>
             </div>
         </div>
     </div>
