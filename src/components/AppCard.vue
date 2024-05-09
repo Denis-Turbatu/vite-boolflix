@@ -29,20 +29,25 @@ export default {
 
 <template>
     <div>
-        <div class="card-body">
-            <img :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="poster" class="imgPoster">
+        <div class="card-body d-flex flex-column align-items-center mb-5">
+            <div class="position-relative d-flex flex-column justify-content-center align-items-center">
+                <img :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="poster" class="imgPoster">
 
-            <h3 class="card-title">{{card.title}}</h3>
-            <h3 class="card-title">{{card.name}}</h3>
-
-            <p class="card-text">{{card.original_title}}</p>
-            <p class="card-text">{{card.original_name}}</p>
-            <p class="card-text">
-                <img :src="getFlagUrl(card.original_language)" alt="flag-country">
-            </p>
-            <div class="star-rating">
-                    <i v-for="i in curRating" :key="i" class="fa-solid fa-star"></i>
-                    <i v-for="i in (5 - curRating)" :key="i" class="fa-regular fa-star"></i>
+                <div class="description d-flex flex-column position-absolute top-50 start-50 translate-middle">
+                    <h3 class="card-title" v-if="card.title">Titolo: {{card.title}}</h3>
+                    <h3 class="card-title" v-else-if="card.name">Nome: {{card.name}}</h3>
+                    <p class="card-text" v-if="card.original_title">Titolo originale: {{card.original_title}}</p>
+                    <p class="card-text" v-if="card.original_name">Nome originale: {{card.original_name}}</p>
+                    <p class="card-text">
+                        <span>Lingua: </span>
+                        <img :src="getFlagUrl(card.original_language)" alt="flag-country">
+                    </p>
+                    <div class="star-rating">
+                        <span>Rating: </span>
+                        <i v-for="i in curRating" :key="i" class="fa-solid fa-star text-warning"></i>
+                        <i v-for="i in (5 - curRating)" :key="i" class="fa-regular fa-star text-warning"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,5 +57,20 @@ export default {
 .imgPoster{
     width: 342px;
     height: 513px;
+    border: solid 4px white;
+}
+
+.position-relative:hover .imgPoster {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.position-relative .description {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.position-relative:hover .description {
+    opacity: 1;
 }
 </style>
