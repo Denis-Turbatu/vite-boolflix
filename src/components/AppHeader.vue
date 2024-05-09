@@ -25,7 +25,7 @@ export default {
         </div>
         <!-- searchbar -->
         <div class="me-5">
-            <input type="text" v-model="query" placeholder="Cerca un film...">
+            <input type="text" v-model="query" placeholder="Cerca un film..." @keyup.enter="emitSaveQuery">
             <!-- search-button -->
             <button @click="emitSaveQuery">Cerca</button>
         </div>
