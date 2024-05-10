@@ -1,4 +1,7 @@
 <script>
+import { store } from '../store.js';
+import axios from "axios";
+
 
 export default {
     props: {
@@ -7,6 +10,7 @@ export default {
     data() {
         return {
             curRating: Math.floor(this.card.vote_average / 2),
+            store,
         }
     },
     methods: {
@@ -22,6 +26,25 @@ export default {
                 return `https://flagcdn.com/36x27/${languageCode}.png`;
             }
         },
+        getMovieId(){
+            let movie_id = this.card.id;
+            console.log(movie_id);
+            axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits`, { params: { api_key: this.store.apiKey} })
+            .then((resp) =>{
+                let iterations = 0
+                if (resp.data.cast.length < 5){
+                    iterations = resp.data.cast.length;
+                    console.log(iterations);
+                }else{
+                    iterations = 5;
+                    console.log(iterations);
+                }
+                for (let i = 0; i < iterations; i++) {
+                    console.log(resp.data.cast[i].name);
+                }
+                
+            })
+        }
     }
 }
 </script>
@@ -45,6 +68,7 @@ export default {
                         <span>Rating: </span>
                         <i v-for="i in curRating" :key="i" class="fa-solid fa-star text-warning"></i>
                         <i v-for="i in (5 - curRating)" :key="i" class="fa-regular fa-star text-warning"></i>
+                        <button class="bg-danger border-0 p-2 mt-4 rounded text-white fw-semibold" @click="getMovieId">Dettagli Cast</button>
                     </div>
                 </div>
             </div>

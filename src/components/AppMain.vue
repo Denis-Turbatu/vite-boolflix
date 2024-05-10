@@ -23,8 +23,10 @@ export default {
         loadMoreMovie() {
             axios.get("https://api.themoviedb.org/3/search/movie", { params: { api_key: this.store.apiKey, query: this.store.searchQuery, page: this.pageIdMovie}}).then((resp) => {
                 this.pageIdMovie++
+                this.movie_id = this.cardArrayMovie.id
                 console.log(resp.data.results);
                 this.cardArrayMovie.push(...resp.data.results);
+                console.log(this.cardArrayMovie.id);
             })
         },
         loadMoreTv() {
