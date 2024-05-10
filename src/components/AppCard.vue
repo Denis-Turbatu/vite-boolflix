@@ -3,7 +3,6 @@
 export default {
     props: {
         card: Object,
-        card: Object,
     },
     data() {
         return {
