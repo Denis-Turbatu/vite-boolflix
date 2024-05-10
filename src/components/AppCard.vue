@@ -11,6 +11,7 @@ export default {
         return {
             curRating: Math.floor(this.card.vote_average / 2),
             store,
+            castNames: [],
         }
     },
     methods: {
@@ -26,7 +27,7 @@ export default {
                 return `https://flagcdn.com/36x27/${languageCode}.png`;
             }
         },
-        getMovieId(){
+        getCast(){
             let movie_id = this.card.id;
             console.log(movie_id);
             axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits`, { params: { api_key: this.store.apiKey} })
@@ -41,6 +42,8 @@ export default {
                 }
                 for (let i = 0; i < iterations; i++) {
                     console.log(resp.data.cast[i].name);
+                    this.castNames.push(resp.data.cast[i].name);
+                    console.log(this.castNames);
                 }
                 
             })
@@ -68,7 +71,11 @@ export default {
                         <span>Rating: </span>
                         <i v-for="i in curRating" :key="i" class="fa-solid fa-star text-warning"></i>
                         <i v-for="i in (5 - curRating)" :key="i" class="fa-regular fa-star text-warning"></i>
-                        <button class="bg-danger border-0 p-2 mt-4 rounded text-white fw-semibold" @click="getMovieId">Dettagli Cast</button>
+                        <button class="bg-danger border-0 p-2 my-4 rounded text-white fw-semibold"
+                            @click="getCast">Dettagli Cast</button>
+                        <ul class="text-decoration-none">
+                            <li v-for="name in castNames" :key="name">{{ name }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -95,5 +102,12 @@ export default {
 
 .position-relative:hover .description {
     opacity: 1;
+}
+ul{
+    padding: 0;
+}
+
+li{
+    list-style-type: none;
 }
 </style>
