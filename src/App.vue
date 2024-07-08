@@ -41,12 +41,13 @@ export default {
 <template>
     <div>
         <AppHeader @filter="getAPI"/>
-        <AppMain :cardArrayMovie="cardArrayMovie" :cardArrayTv="cardArrayTv"/>
+        <router-view></router-view>
+        <!-- <AppMain :cardArrayMovie="cardArrayMovie" :cardArrayTv="cardArrayTv"/> -->
     </div>
 </template>
 
 <style lang="scss">
     body{
-        background-color: grey;
+        background-color: black;
     }
 </style>
