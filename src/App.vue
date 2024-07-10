@@ -1,14 +1,14 @@
 <script>
 import {store} from './store.js';
 import AppHeader from './components/AppHeader.vue';
-import AppMain from './components/AppMain.vue';
+// import AppMain from './components/AppMain.vue';
 import axios from "axios";
 
 
 export default {
     components: { 
         AppHeader,
-        AppMain,
+        // AppMain,
     },
     data() {
         return {
@@ -41,7 +41,7 @@ export default {
 <template>
     <div>
         <AppHeader @filter="getAPI"/>
-        <router-view></router-view>
+        <router-view :cardArrayMovie="cardArrayMovie" :cardArrayTv="cardArrayTv"></router-view>
         <!-- <AppMain :cardArrayMovie="cardArrayMovie" :cardArrayTv="cardArrayTv"/> -->
     </div>
 </template>

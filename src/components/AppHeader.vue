@@ -6,6 +6,10 @@
                 query: "",
                 routes: [
                     {
+                        routeName: "home",
+                        title: 'Home', 
+                    },
+                    {
                         routeName: "movies",
                         title: 'Movies', 
                     },
