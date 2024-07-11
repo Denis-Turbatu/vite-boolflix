@@ -1,22 +1,23 @@
 <template>
-  <swiper
-    :slidesPerView="4"
-    :spaceBetween="30"
-    :centeredSlides="false"
-    :autoplay="{
-      delay: 2500,
-      disableOnInteraction: true,
-    }"
-    :navigation="false"
-    :modules="modules"
-    class="mySwiper"
+  <swiper 
+    :slidesPerView="6" 
+    :spaceBetween="30" 
+    :centeredSlides="false" 
+    :loop="true" 
+    :navigation="true"
+    :modules="modules" 
+    class="mySwiper" 
     :class="{ 'swiper-pagination-hidden': true }"
-  >
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide><swiper-slide>Slide 3</swiper-slide>
-    <swiper-slide>Slide 4</swiper-slide><swiper-slide>Slide 5</swiper-slide>
-    <swiper-slide>Slide 6</swiper-slide><swiper-slide>Slide 7</swiper-slide>
-    <swiper-slide>Slide 8</swiper-slide><swiper-slide>Slide 9</swiper-slide>
+    >
+
+    <swiper-slide v-for="item in popularFilms" 
+      :key="item" 
+      class="ms-slider"
+      :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/w500${item.poster_path})` }"
+      >
+      
+      <!-- <h3 class="card-title" v-if="item.title">Titolo: {{item.title}}</h3> -->
+    </swiper-slide>
   </swiper>
 </template>
 <script>
@@ -33,11 +34,17 @@
 
   // import required modules
   import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+  import {store} from '../store.js';
 
   export default {
     components: {
       Swiper,
       SwiperSlide,
+    },
+    props: {
+      store,
+      popularFilms: Array,
+      popularSeries: Array,
     },
     setup() {
       return {
@@ -46,3 +53,20 @@
     },
   };
 </script>
+
+<style lang="scss" scoped>
+.ms-slider{
+  background-size: cover;
+  background-position: center;
+}
+
+.swiper-navigation-prev {
+    background-color: #ffffff; /* Imposta lo sfondo bianco del pulsante precedente */
+    color: #000000; /* Imposta il testo nero del pulsante precedente */
+}
+
+.swiper-navigation-next {
+    background-color: #ffffff; /* Imposta lo sfondo bianco del pulsante successivo */
+    color: #000000; /* Imposta il testo nero del pulsante successivo */
+}
+</style>
