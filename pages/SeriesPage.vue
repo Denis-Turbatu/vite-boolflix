@@ -1,5 +1,6 @@
 <script>
 import AppCard from '../src/components/AppCard.vue';
+import AppSwiper from '../src/components/AppSwiper.vue';
 import {store} from '../src/store.js';
 import axios from "axios";
 
@@ -7,6 +8,7 @@ import axios from "axios";
 export default {
     components:{
         AppCard,
+        AppSwiper,
     },
     props: {
         cardArrayTv: Array,
@@ -33,6 +35,10 @@ export default {
     <div class="text-white">
         Series
     </div>
+    <div class="ms-swiper">
+        
+        <AppSwiper/>
+    </div>
     <div>
         <div class="mx-5">
             <div class="row d-flex flex-wrap">
@@ -52,6 +58,9 @@ export default {
 <style lang="scss" scoped>
     .btn{
         max-width: 200px;
-        
+    }
+
+    .ms-swiper{
+        height: 250px;
     }
 </style>
