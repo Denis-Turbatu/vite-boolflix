@@ -12,6 +12,7 @@ export default {
             curRating: Math.floor(this.card.vote_average / 2),
             store,
             castNames: [],
+            isCastLoaded: false,
         }
     },
     methods: {
@@ -32,6 +33,8 @@ export default {
             console.log(movie_id);
             axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/credits`, { params: { api_key: this.store.apiKey} })
             .then((resp) =>{
+                if (this.isCastLoaded) return;
+
                 let iterations = 0
                 if (resp.data.cast.length < 5){
                     iterations = resp.data.cast.length;
@@ -45,7 +48,7 @@ export default {
                     this.castNames.push(resp.data.cast[i].name);
                     console.log(this.castNames);
                 }
-                
+                this.isCastLoaded = true;
             })
         }
     }
@@ -54,7 +57,7 @@ export default {
 
 <template>
     <div>
-        <div class="card-body d-flex flex-column align-items-center mb-5">
+        <div class="card-body d-flex flex-column align-items-center mb-5 text-white">
             <div class="position-relative d-flex flex-column justify-content-center align-items-center">
                 <img :src="`https://image.tmdb.org/t/p/w342${card.poster_path}`" alt="poster" class="imgPoster">
 
@@ -73,7 +76,7 @@ export default {
                         <i v-for="i in (5 - curRating)" :key="i" class="fa-regular fa-star text-warning"></i>
                         <button class="bg-danger border-0 p-2 my-4 rounded text-white fw-semibold"
                             @click="getCast">Dettagli Cast</button>
-                        <ul class="text-decoration-none">
+                        <ul v-if="isCastLoaded" class="text-decoration-none">
                             <li v-for="name in castNames" :key="name">{{ name }}</li>
                         </ul>
                     </div>

@@ -43,7 +43,7 @@
         <header class="bg-black d-flex py-4 justify-content-between align-items-center container">
             <div class="ms-5 ms-logo">
                 <a href="#" class="text-decoration-none">
-                    <img src="../assets/Logonetflix.png" alt="netflix-logo" class="img-fluid" />
+                    <span class="fw-semibold fs-1 text-danger">Boolflix</span>
                 </a>
             </div>
             <ul class="ms-navbar d-flex gap-5 list-unstyled justify-content-center m-0">
